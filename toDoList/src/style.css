@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Comfortaa', cursive;
+  cursor: pointer;
+}
+
+#container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  color: blueviolet;
+}
+
+#add-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 80vw;
+  animation: myMove 10s infinite;
+  border-radius: 5px;
+  border: 2px solid whitesmoke;
+  list-style: none;
+}
+
+@keyframes myMove {
+  40% { box-shadow: -1px 1px 10px 15px purple; }
+}
+
+#listTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+#new-task {
+  margin: 5px;
+  width: 95%;
+  border: 1px solid white;
+}
+
+.input-section {
+  display: flex;
+}
+
+hr {
+  width: 100%;
+}
+
+#todo-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+#add-task {
+  background: white;
+  border: solid white;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+#remove-completed {
+  border: solid white;
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+  #add-form {
+    width: 450px;
+  }
+}
