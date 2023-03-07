@@ -11,22 +11,9 @@ class EditFunctions {
 
   toggleCompleted(index) {
     this.tasks[index].completed = !this.tasks[index].completed;
-    this.renderTasks();
-    const selectedCheckboxes = this.todoList.querySelectorAll('input[type="checkbox"]:checked');
-    selectedCheckboxes.forEach((checkbox) => {
-      const taskItem = checkbox.parentNode;
-      const taskIndex = Array.from(this.todoList.children).indexOf(taskItem);
-      this.tasks[taskIndex].completed = true;
-      taskItem.classList.add('completed');
-      checkbox.setAttribute('checked', '');
-    });
-    const unselectedCheckboxes = this.todoList.querySelectorAll('input[type="checkbox"]:not(:checked)');
-    unselectedCheckboxes.forEach((checkbox) => {
-      const taskItem = checkbox.parentNode;
-      const taskIndex = Array.from(this.todoList.children).indexOf(taskItem);
-      this.tasks[taskIndex].completed = false;
-      taskItem.classList.remove('completed');
-      checkbox.removeAttribute('checked');
+    this.updateCompletedStatus(index);
+    this.tasks.forEach((task, taskIndex) => {
+      this.updateTaskAppearance(taskIndex);
     });
   }
 
@@ -57,17 +44,29 @@ class EditFunctions {
       taskItem.appendChild(taskDescription);
       taskItem.appendChild(hr);
       this.todoList.appendChild(taskItem);
-    });
-    this.tasks.forEach((task, index) => {
-      const taskItem = this.todoList.children[index];
-      if (task.completed) {
-        taskItem.classList.add('completed');
-      } else {
-        taskItem.classList.remove('completed');
-      }
+      this.updateTaskAppearance(index);
     });
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
+  
+  updateCompletedStatus(index) {
+    const checkbox = this.todoList.children[index].querySelector('input[type="checkbox"]');
+    if (this.tasks[index].completed) {
+      checkbox.setAttribute('checked', '');
+    } else {
+      checkbox.removeAttribute('checked');
+    }
+  }
+  
+  updateTaskAppearance(index) {
+    const taskItem = this.todoList.children[index];
+    if (this.tasks[index].completed) {
+      taskItem.classList.add('completed');
+    } else {
+      taskItem.classList.remove('completed');
+    }
+  }
 }
+
 
 export default EditFunctions;
